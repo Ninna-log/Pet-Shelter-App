@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/pets") // this is a good practice
@@ -26,5 +27,17 @@ public class PetController {
     public ResponseEntity<Long> create(@RequestBody Pet pet){
         Pet newPet = petRepository.save(pet);
         return new ResponseEntity<>(newPet.getId(), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("{petId}") // receives an id that travels with the url
+    public ResponseEntity<String> delete(@PathVariable Long petId){
+        Optional<Pet> optionalPet = petRepository.findById(petId);
+
+        if (optionalPet.isPresent()) {
+            petRepository.deleteById(petId);
+            return new ResponseEntity<>("eliminated", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("pet doesn't exists", HttpStatus.NOT_FOUND);
+        }
     }
 }
