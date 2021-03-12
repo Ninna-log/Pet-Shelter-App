@@ -20,7 +20,7 @@ var app = new Vue({
                 .fail(function(error){
                 alert("Something happened")
                 })
-        }
+        },
     }
 })
 

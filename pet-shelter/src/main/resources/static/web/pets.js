@@ -6,7 +6,16 @@ var app = new Vue({
     age: null
   },
   methods: {
-
+        remove: function (petId) {
+            axios.delete("/api/v1/pets/" + petId)
+               .then(function(response){
+               alert("Your pet was successfully eliminated")
+               window.location.reload();
+               })
+              .catch(function(error){
+               alert("Something happened")
+            })
+        }
     }
 })
 
@@ -22,5 +31,3 @@ fetch("/api/v1/pets")
    .then(function (res) {
         app.pets = res;
    })
-
-   app.create();
