@@ -1,19 +1,19 @@
 var app = new Vue({
   el: '#pets-app',
   data: {
-    pets: [],
     name: null,
     age: null
   },
   methods: {
-        remove: function (petId) {
-            axios.delete("/api/v1/pets/" + petId)
-               .then(function(response){
-               alert("Your pet was successfully eliminated")
-               window.location.reload();
-               })
-              .catch(function(error){
-               alert("Something happened")
+        getData: function() {
+            var url = new URL (window.location.href);
+            var petId = url.searchParams.get("petId");
+            axios.get("/api/v1/pets/" + petId)
+            .then(function(res){
+                app.pets = res.data;
+            })
+            .catch(function(error) {
+                alert("something happened")
             })
         },
         update: function (petId) {
@@ -35,3 +35,4 @@ fetch("/api/v1/pets")
         app.pets = res;
    })
 
+app.getData();

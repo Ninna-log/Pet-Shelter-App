@@ -26,7 +26,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-11">
-                        <a href="main.html"><button class="btn btn-outline-primary btn-sm" onclick= "blur()">Create your pet</button></a>
+                        <a href="pet-creation.html"><button class="btn btn-outline-primary btn-sm" onclick= "blur()">Create your pet</button></a>
                         <table class="table table-hover table-borderless table-responsive table-sm mt-2" class="position-relative">
                             <thead>
                                 <th>Name</th>
@@ -38,7 +38,7 @@
                                     <td>{{pet.age}}</td>
                                     <td class="position-absolute end-5">
                                         <button class="btn btn-danger btn-sm position-relative" v-on:click="remove(pet.id)" onclick= "blur()"><i class="far fa-trash-alt"></i></button>
-                                        <button class="btn btn-success btn-sm position-relative" onclick= "blur()"><i class="fas fa-pencil-alt"></i></button>
+                                        <button class="btn btn-success btn-sm position-relative" v-on:click="update(pet.id)" onclick= "blur()"><i class="fas fa-pencil-alt"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
