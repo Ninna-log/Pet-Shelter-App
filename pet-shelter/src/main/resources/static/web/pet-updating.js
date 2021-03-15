@@ -8,11 +8,12 @@ var app = new Vue({
         getData: function() {
             var url = new URL (window.location.href);
             var petId = url.searchParams.get("petId");
-            axios.get("/api/v1/pets/" + petId)
-            .then(function(res){
-                app.pets = res.data;
+            $.get("/api/v1/pets/" + petId)
+            .done(function(response){
+                app.name = response.data.name;
+                app.age = response.data.age;
             })
-            .catch(function(error) {
+            .fail(function(error) {
                 alert("something happened")
             })
         },
@@ -21,18 +22,5 @@ var app = new Vue({
         }
     }
 })
-
-fetch("/api/v1/pets")
-    .then(function (res) {
-    if (res.ok) {
-        return res.json();
-    }
-    else {
-        throw new error(res.status)
-        }
-    })
-   .then(function (res) {
-        app.pets = res;
-   })
 
 app.getData();

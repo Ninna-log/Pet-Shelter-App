@@ -23,6 +23,11 @@ public class PetController {
         return new ResponseEntity<>((petRepository.findAll()), HttpStatus.OK);
     }
 
+    @GetMapping("{petId}")
+    public ResponseEntity<Pet> getById(@PathVariable Long petId){ //returns a list of Pet
+            return new ResponseEntity<>(petRepository.findById(petId).get(), HttpStatus.OK);
+    }
+
     @PostMapping // receives a pet object in order to create one
     public ResponseEntity<Long> create(@RequestBody Pet pet){
         Pet newPet = petRepository.save(pet);
