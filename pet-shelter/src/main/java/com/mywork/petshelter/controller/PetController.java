@@ -23,7 +23,12 @@ public class PetController {
     }
 
     @GetMapping("{petId}")
-    public ResponseEntity<String> getById(@PathVariable Long petId, @RequestBody Pet pet){
+    public ResponseEntity<Pet> getById(@PathVariable Long petId){
+        return new ResponseEntity<>(petRepository.findById(petId).get(), HttpStatus.OK);
+    }
+
+    @PutMapping("{petId}")
+    public ResponseEntity<String> updatingPet(@PathVariable Long petId, @RequestBody Pet pet){
         Optional<Pet> optionalPet = petRepository.findById(petId);
         optionalPet.ifPresent((x) -> {
             x.setName(pet.getName());

@@ -7,13 +7,14 @@ var app = new Vue({
   },
   methods: {
         remove: function(petId) {
+            if(confirm("You really wanna delete it?"))
             axios.delete("/api/v1/pets/" + petId)
                .then(function(response){
                alert("Your pet was successfully eliminated")
                window.location.reload();
                })
               .catch(function(error){
-               alert("Something happened")
+               alert("There's been an error")
             })
         },
         edit: function(petId) {
