@@ -23,8 +23,14 @@ public class PetController {
     }
 
     @GetMapping("{petId}")
-    public ResponseEntity<Pet> getById(@PathVariable Long petId){ //returns a list of Pet
-            return new ResponseEntity<>(petRepository.findById(petId).get(), HttpStatus.OK);
+    public ResponseEntity<String> getById(@PathVariable Long petId, @RequestBody Pet pet){
+        Optional<Pet> optionalPet = petRepository.findById(petId);
+        optionalPet.ifPresent((x) -> {
+            x.setName(pet.getName());
+            x.setAge(pet.getAge());
+            petRepository.save(x);
+        });
+            return new ResponseEntity<>("Pet successfully updated", HttpStatus.OK);
     }
 
     @PostMapping // receives a pet object in order to create one
@@ -39,9 +45,9 @@ public class PetController {
 
         if (optionalPet.isPresent()) {
             petRepository.deleteById(petId);
-            return new ResponseEntity<>("eliminated", HttpStatus.OK);
+            return new ResponseEntity<>("Pet successfully eliminated", HttpStatus.OK);
         }else {
-            return new ResponseEntity<>("pet doesn't exists", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Pet doesn't exists", HttpStatus.NOT_FOUND);
         }
     }
 }
