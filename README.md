@@ -1,5 +1,5 @@
 # Pet-Shelter-App
-This is a Pet Shelter App where I mostly practice CRUD
+This is a demo for the Pet Shelter App
 
 Pet Shelter Application. 
 This application was made as follows: 
